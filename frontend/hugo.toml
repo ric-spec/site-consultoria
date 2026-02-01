@@ -2,3 +2,13 @@ baseURL = 'https://site-consultoria-pd8r.vercel.app/'
 languageCode = 'pt-br'
 title = 'Henrique Oliver | Finanças e Governança'
 theme = 'ananke'
+[module]
+  [module.hugoVersion]
+    extended = true
+    min = "0.110.0"
+
+[security]
+  [security.funcs]
+    getenv = ['^HUGO_', '^Vercel_']
+  [security.http]
+    methods = ['GET', 'POST']
