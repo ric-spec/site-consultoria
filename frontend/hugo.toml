@@ -1,17 +1,12 @@
-baseURL = 'https://site-consultoria-pd8r-1fz8u24xj-ric-specs-projects.vercel.app/'
+baseURL = 'https://site-consultoria-pd8r.vercel.app/'
 languageCode = 'pt-br'
 title = 'Henrique Oliver | Finanças e Governança'
 theme = 'ananke'
 
-# Força o Hugo a reconhecer a pasta themes local
-[module]
-  replacements = "github.com/theNewDynamic/gohugo-theme-ananke -> themes/ananke"
+[params]
+  description = "Especialista em Administração Pública e Gestão de TI"
+  custom_css = []
 
-[[menu.main]]
-  name = "Home"
-  url = "/"
-  weight = 1
-# Força o Hugo a olhar apenas para a pasta local
 [module]
   [[module.mounts]]
     source = 'content'
@@ -19,13 +14,12 @@ theme = 'ananke'
   [[module.mounts]]
     source = 'themes/ananke'
     target = 'themes/ananke'
+  [[module.mounts]]
+    source = 'static'
+    target = 'static'
+  [[module.mounts]]
+    source = 'themes/ananke/assets'
+    target = 'assets'
 
-[params]
-  description = "Especialista em Administração Pública e Gestão de TI"
-  # Isso ajuda o tema Ananke a carregar os estilos corretamente
-  custom_css = []
-  
 [build]
   writeStats = true
-  [build.buildStats]
-    enable = true
