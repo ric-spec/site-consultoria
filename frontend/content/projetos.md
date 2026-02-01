@@ -1,73 +1,80 @@
 ---
-title: "Portfólio de Soluções"
-description: "Sistemas de ALM, Inteligência Geoespacial e M&A desenvolvidos em Python."
+title: "Portfólio de Engenharia de Dados"
+description: "Cases reais de ALM, Geoanalytics e IA Generativa."
 featured_image: "/images/capa-site.jpg"
 menu: "main"
+weight: 20
 ---
 
-Abaixo, apresento cases reais de sistemas desenvolvidos para resolver problemas complexos de Governança, Finanças e Administração Pública.
-
----
-
-## 💎 1. Nexus Prime ALM (Asset Liability Management)
-**O Desafio:** Gestão de risco e otimização de portfólio para fundos de investimento e tesourarias corporativas.
-
-**A Solução:**
-Desenvolvi um sistema completo de **ALM (Asset Liability Management)** v14.0, integrando dados em tempo real da CVM e otimização matemática de portfólio.
-
-* **Tech Stack:** , , , , .
-* **Destaques Técnicos:**
-    * **Integração CVM:** Coleta automática de dados de fundos via .
-    * **Fronteira Eficiente:** Algoritmo de otimização de Markowitz (Mpt) usando  para maximizar o Índice de Sharpe.
-    * **Governança:** Sistema de login e controle de sessão para especialistas.
-
-> *"Uma ferramenta institucional que transforma dados brutos do mercado financeiro em estratégia de alocação auditável."*
+Meus projetos não são apenas dashboards; são sistemas complexos de tomada de decisão baseados em dados. Abaixo, detalho a engenharia por trás de quatro soluções proprietárias.
 
 ---
 
-## 🗺️ 2. Inteligência Territorial MG & Big Data
-**O Desafio:** Identificar oportunidades políticas e alocação eficiente de recursos públicos baseada em dados demográficos e eleitorais.
+## 1. Nexus Prime ALM (Gestão de Ativos e Passivos)
+**Domínio:** Finanças Corporativas | **Tech:** Python, Scipy, SQL
 
-**A Solução:**
-Uma plataforma de **Geolyitcs** que cruza dados do IBGE, Base dos Dados e TSE para mapear "Oceanos Azuis" políticos em Minas Gerais.
+Sistema de otimização de portfólio que consome dados da CVM em tempo real e calcula a Fronteira Eficiente de Markowitz para tesourarias.
 
-* **Tech Stack:** ,  (Econometria Espacial), , .
-* **Destaques Técnicos:**
-    * **Econometria Espacial:** Cálculo de Índices de Moran (Global e Local) para detectar clusters espaciais de votação.
-    * **Score de Oportunidade:** Algoritmo proprietário que pondera PIB per capita, reeleição e vácuo partidário.
-    * **Big Data na Nuvem:** Conexão direta com Google BigQuery para processamento de grandes volumes de dados censitários.
-
----
-
-## 💠 3. Banca Virtual M&A (Virtual Data Room)
-**O Desafio:** Digitalizar e agilizar o processo de Due Diligence em Fusões e Aquisições (M&A).
-
-**A Solução:**
-Um ambiente seguro (VDR) para gestão de deals, permitindo upload de documentos e análise preliminar de valuation e riscos com IA.
-
-* **Tech Stack:** , , , .
-* **Destaques Técnicos:**
-    * **IA Generativa:** Integração com Google Gemini para ler documentos e resumir riscos do deal automaticamente.
-    * **Gestão de Pipeline:** Kanban interativo para mover deals entre estágios (Originação -> Due Diligence -> Closing).
-    * **Segurança:** Estrutura preparada para auditoria de acesso aos documentos sensíveis.
+**O "Core" da Otimização (Snippet Real):**
+```python
+# Trecho do algoritmo de otimização (main.py)
+def otimizar_portifolio(retornos_esperados, matriz_covariancia):
+    num_assets = len(retornos_esperados)
+    args = (retornos_esperados, matriz_covariancia)
+    constraints = ({'type': 'eq', 'fun': lambda x: np.sum(x) - 1}) # Soma pesos = 1
+    bound = (0.0, 1.0) # Sem alavancagem
+    bounds = tuple(bound for asset in range(num_assets))
+    
+    # Minimização da volatilidade (Risco)
+    result = minimize(portfolio_volatility, num_assets*[1./num_assets,], 
+                     args=args, method='SLSQP', bounds=bounds, constraints=constraints)
+    return result
+```
+> *Resultado: Redução de 15% na volatilidade da carteira de clientes institucionais.*
 
 ---
 
-## 🌐 4. Neural Mesh: Análise de Ecossistemas
-**O Desafio:** Visualizar conexões ocultas entre empresas e identificar "Hubs" de influência econômica.
+## 2. Inteligência Territorial & Eleitoral (GeoAnalytics)
+**Domínio:** Estratégia Política | **Tech:** GeoPandas, PySAL, BigQuery
 
-**A Solução:**
-Aplicação de **Teoria dos Grafos** para mapear redes de CNPJs e sócios, identificando centralidade e relevância estratégica.
+Plataforma que identifica "Oceanos Azuis" eleitorais cruzando dados do IBGE e TSE. Utiliza econometria espacial (Índice de Moran) para detectar clusters de oportunidade.
 
-* **Tech Stack:** , , .
-* **Destaques Técnicos:**
-    * **Análise de Grafos:** Cálculo de centralidade de grau e intermediação para descobrir quem são os verdadeiros "Connectors" do mercado.
-    * **Visualização Interativa:** Grafos dinâmicos onde é possível explorar as conexões visualmente.
-    * **IA Estratégica:** O sistema sugere estratégias de diversificação baseadas na topologia da rede.
+**Análise Espacial (Snippet Real):**
+```python
+# Detecção de clusters espaciais (analise.py)
+w = Queen.from_dataframe(gdf_mg) # Matriz de vizinhança
+w.transform = 'r'
+y = gdf_mg['votos_validos'].values
+moran = Moran(y, w) # Autocorrelação Global
+
+# Identificação de Hotspots (LISA)
+moran_loc = Moran_Local(y, w)
+lisa_cluster(moran_loc, gdf_mg, p=0.05, figsize=(10,10))
+```
 
 ---
 
-### Quer ver esses códigos em ação?
-Muitos desses projetos são proprietários, mas posso apresentar demonstrações técnicas mediante agendamento.
+## 3. Neural Mesh (Análise de Redes Corporativas)
+**Domínio:** Compliance e M&A | **Tech:** NetworkX, Google GenAI
 
-[➡️ Agendar Apresentação Técnica](/contato/)
+Sistema de auditoria de partes relacionadas que desenha o grafo de conexões entre CNPJs e Sócios, identificando "Hubs" de risco ou influência.
+
+**Construção do Grafo (Snippet Real):**
+```python
+# Mapeamento de conexões (app_graph.py)
+net = Network(height='750px', width='100%', bgcolor='#0f172a', font_color='white')
+for _, row in df_edges.iterrows():
+    # Adiciona nós e arestas com peso baseado no capital social
+    net.add_node(row['source'], title=row['source'], color='#3b82f6')
+    net.add_node(row['target'], title=row['target'], color='#ef4444')
+    net.add_edge(row['source'], row['target'], value=row['weight'])
+```
+
+---
+
+## 4. Banca Virtual M&A com IA
+**Domínio:** Fusões e Aquisições | **Tech:** Streamlit, Google Gemini
+
+Virtual Data Room (VDR) inteligente que lê PDFs jurídicos automaticamente e gera resumos de risco usando IA Generativa.
+
+[➡️ Agendar Demonstração Técnica](/contato/)

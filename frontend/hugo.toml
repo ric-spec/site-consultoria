@@ -47,3 +47,9 @@ theme = 'meutema'
   name = "Portfólio & Cases"
   url = "/projetos/"
   weight = 15
+
+[[menu.main]]
+  identifier = "sobre"
+  name = "Sobre Mim"
+  url = "/sobre/"
+  weight = 5
