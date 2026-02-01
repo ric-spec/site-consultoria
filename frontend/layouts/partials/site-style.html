@@ -1,25 +1,54 @@
 <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 <style>
   :root {
-    --brand-color: #003366; /* Azul Corporativo Sóbrio */
-    --text-color: #333333;
-    --bg-color: #f4f7f6;
+    --brand-dark: #0f172a;  /* Azul Noturno (Tech) */
+    --brand-blue: #2563eb;  /* Azul Royal (Link/Botão) */
+    --text-main: #334155;   /* Cinza Chumbo (Leitura) */
+    --bg-light: #f8fafc;    /* Branco Gelo (Fundo) */
   }
+  
   body {
-    font-family: 'Avenir Next', 'Segoe UI', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-main);
   }
-  /* Ajuste do Cabeçalho para ficar profissional */
-  header.bg-top {
-    background-image: none !important;
-    background-color: var(--brand-color) !important;
+
+  /* Cabeçalho Premium */
+  header {
+    background-color: var(--brand-dark) !important;
+    border-bottom: 4px solid var(--brand-blue);
   }
-  header h1, header h2 {
-    color: white !important;
+  
+  /* Menu */
+  nav a { 
+    color: white !important; 
+    opacity: 0.9;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
   }
-  /* Botões e Links */
-  a { color: var(--brand-color); transition: 0.3s; }
-  a:hover { opacity: 0.8; }
+  nav a:hover { opacity: 1; color: var(--brand-blue) !important; }
+
+  /* Botão CTA do Menu */
+  nav a[href*="/contato/"] {
+    background-color: var(--brand-blue);
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+  }
+
+  /* Títulos */
+  h1, h2, h3 { color: var(--brand-dark); }
+  
+  /* Blocos de Código (Para o seu Portfólio) */
+  pre {
+    background-color: #1e293b;
+    color: #a5b4fc;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--brand-blue);
+    overflow-x: auto;
+  }
 </style>
