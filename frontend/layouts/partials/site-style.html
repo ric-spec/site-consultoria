@@ -1,54 +1,26 @@
 <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
 <style>
-  :root {
-    --brand-dark: #0f172a;  /* Azul Noturno (Tech) */
-    --brand-blue: #2563eb;  /* Azul Royal (Link/Botão) */
-    --text-main: #334155;   /* Cinza Chumbo (Leitura) */
-    --bg-light: #f8fafc;    /* Branco Gelo (Fundo) */
-  }
+  :root { --brand-dark: #0f172a; --brand-blue: #2563eb; }
+  body { font-family: 'Inter', system-ui; color: #334155; line-height: 1.5; margin: 0; }
   
-  body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-main);
+  /* Hero Section Responsiva */
+  .hero {
+    background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+                url('/images/capa-site.jpg') center/cover no-repeat;
+    padding: 100px 20px;
+    color: white;
+    text-align: center;
   }
 
-  /* Cabeçalho Premium */
-  header {
-    background-color: var(--brand-dark) !important;
-    border-bottom: 4px solid var(--brand-blue);
-  }
-  
-  /* Menu */
-  nav a { 
-    color: white !important; 
-    opacity: 0.9;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    transition: all 0.2s;
-  }
-  nav a:hover { opacity: 1; color: var(--brand-blue) !important; }
-
-  /* Botão CTA do Menu */
-  nav a[href*="/contato/"] {
-    background-color: var(--brand-blue);
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-weight: bold;
+  /* Ajuste para Mobile */
+  @media screen and (max-width: 60em) {
+    .hero { padding: 60px 10px; }
+    .f1 { font-size: 2rem; }
   }
 
-  /* Títulos */
-  h1, h2, h3 { color: var(--brand-dark); }
+  /* Container do Conteúdo */
+  .content-box { max-width: 900px; margin: 0 auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); margin-top: -50px; }
   
-  /* Blocos de Código (Para o seu Portfólio) */
-  pre {
-    background-color: #1e293b;
-    color: #a5b4fc;
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 4px solid var(--brand-blue);
-    overflow-x: auto;
-  }
+  /* Estilo dos Blocos de Código */
+  pre { background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 8px; overflow-x: auto; font-size: 14px; }
 </style>
