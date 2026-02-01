@@ -1,14 +1,16 @@
-baseURL = 'https://site-consultoria-pd8r.vercel.app/'
+baseURL = 'https://henriqueoliver.adm.br/'
 languageCode = 'pt-br'
 title = 'Henrique Oliver | Finanças e Governança'
 theme = 'ananke'
-[module]
-  [module.hugoVersion]
-    extended = true
-    min = "0.110.0"
 
-[security]
-  [security.funcs]
-    getenv = ['^HUGO_', '^Vercel_']
-  [security.http]
-    methods = ['GET', 'POST']
+[params]
+  description = "Especialista em Administração Pública e Gestão de TI"
+
+# Força o Hugo a reconhecer a pasta themes local
+[module]
+  replacements = "github.com/theNewDynamic/gohugo-theme-ananke -> themes/ananke"
+
+[[menu.main]]
+  name = "Home"
+  url = "/"
+  weight = 1
