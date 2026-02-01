@@ -1,27 +1,32 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import psycopg2
-import os
-from dotenv import load_dotenv
+from fastapi import FastAPI, Form
+from fastapi.middleware.cors import CORSMiddleware
 
-load_dotenv()
-app = FastAPI(title="Agente de Governanca Henrique Oliver")
+app = FastAPI()
 
-class Lead(BaseModel):
-    nome: str
-    email: str
-    mensagem: str
+# --- Configuração de Segurança (CORS) ---
+# Permite que seu site na Vercel converse com este backend
+origins = [
+    "https://site-consultoria-pd8r.vercel.app",  # Seu link Vercel
+    "https://henriqueoliver.adm.br",             # Seu domínio oficial
+    "http://localhost:1313"                      # Para testes locais
+]
 
-@app.post("/api/chat")
-async def handle_lead(lead: Lead):
-    try:
-        conn = psycopg2.connect(os.getenv("DATABASE_URL"), sslmode='require')
-        cur = conn.cursor()
-        cur.execute("INSERT INTO leads_consultoria (nome, email, resumo_ia) VALUES (%s, %s, %s)", 
-                    (lead.nome, lead.email, lead.mensagem))
-        conn.commit()
-        cur.close()
-        conn.close()
-        return {"status": "sucesso", "msg": "Dados salvos com sucesso."}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # Por enquanto liberado geral para facilitar o setup
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+def read_root():
+    return {"status": "online", "message": "API do Agente de IA operante."}
+
+@app.post("/contato")
+def receber_contato(nome: str = Form(...), email: str = Form(...), mensagem: str = Form(...)):
+    # Aqui é onde a IA vai entrar depois.
+    # Por enquanto, apenas recebemos e confirmamos.
+    print(f"Nova mensagem de: {nome} <{email}>")
+    print(f"Conteúdo: {mensagem}")
+    return {"status": "recebido", "message": "Obrigado! Recebi sua mensagem."}
