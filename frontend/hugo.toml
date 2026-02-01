@@ -41,3 +41,9 @@ theme = 'meutema'
     name = "Falar com Agente IA"
     url = "/contato/"
     weight = 30
+
+[[menu.main]]
+  identifier = "projetos"
+  name = "Portfólio & Cases"
+  url = "/projetos/"
+  weight = 15
