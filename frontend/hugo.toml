@@ -1,10 +1,7 @@
-baseURL = 'https://henriqueoliver.adm.br/'
+baseURL = 'https://site-consultoria-pd8r-1fz8u24xj-ric-specs-projects.vercel.app/'
 languageCode = 'pt-br'
 title = 'Henrique Oliver | Finanças e Governança'
 theme = 'ananke'
-
-[params]
-  description = "Especialista em Administração Pública e Gestão de TI"
 
 # Força o Hugo a reconhecer a pasta themes local
 [module]
@@ -14,3 +11,21 @@ theme = 'ananke'
   name = "Home"
   url = "/"
   weight = 1
+# Força o Hugo a olhar apenas para a pasta local
+[module]
+  [[module.mounts]]
+    source = 'content'
+    target = 'content'
+  [[module.mounts]]
+    source = 'themes/ananke'
+    target = 'themes/ananke'
+
+[params]
+  description = "Especialista em Administração Pública e Gestão de TI"
+  # Isso ajuda o tema Ananke a carregar os estilos corretamente
+  custom_css = []
+  
+[build]
+  writeStats = true
+  [build.buildStats]
+    enable = true
