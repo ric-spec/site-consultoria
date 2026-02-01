@@ -1,3 +1,4 @@
-baseURL = 'https://henriqueoliver.adm.br/'
-title = 'Henrique Oliver | Financas e Governanca'
+baseURL = 'https://site-consultoria-pd8r.vercel.app/'
+languageCode = 'pt-br'
+title = 'Henrique Oliver | Finanças e Governança'
 theme = 'ananke'

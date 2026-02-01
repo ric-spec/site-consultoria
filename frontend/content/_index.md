@@ -1,5 +1,12 @@
 ---
-title: "Engenharia Financeira e Governança de Dados"
+title: "Consultoria Estratégica & Governança de TI"
+featured_image: '/images/gohugo-default-sample-hero.jpg'
+description: "Bacharel em Administração Pública (CRA Ativo) unindo Finanças e Tecnologia."
 ---
-### Consultoria Estratégica em M&A e Gestão de Ativos
-Unindo o rigor da **Administração Pública (CRA Ativo)** à agilidade da automação em **Python**.
+
+### Engenharia Financeira e Gestão de Ativos
+Bem-vindo ao ecossistema de Henrique Oliver. Aqui, a **Governança de Dados** encontra o rigor da **Administração Pública**.
+
+- **Valuation e M&A**
+- **Automação de Processos com Python**
+- **Gestão de Mandatos e Ativos**
