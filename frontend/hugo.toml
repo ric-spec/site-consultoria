@@ -1,7 +1,7 @@
 baseURL = 'https://site-consultoria-pd8r.vercel.app/'
 languageCode = 'pt-br'
 title = 'Henrique Oliver | Finanças e Governança'
-theme = 'ananke'
+theme = 'meutema'
 
 [params]
   description = "Especialista em Administração Pública e Gestão de TI"
