@@ -1,13 +1,12 @@
 import os
 import uvicorn
 import psycopg2
-from fastapi import FastAPI, HTTPException, Request
-from pydantic import BaseModel
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# 1. Configuração de CORS (Liberar acesso do site)
+# Configuração de CORS (Permitir acesso do Site e Scripts)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,31 +15,36 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# 2. Modelo de Dados (Garante que os nomes batem)
-class Contato(BaseModel):
-    nome: str
-    email: str
-    mensagem: str
-
 @app.get("/")
 def home():
-    return {"status": "online", "system": "Henrique Oliver Agent V2"}
+    return {"status": "online", "mode": "Debug Raw"}
 
+# Note o uso de 'request: Request' em vez do modelo Pydantic
 @app.post("/contato")
-def receber_contato(dado: Contato):
-    print(f"📥 Recebido: {dado}")  # Isso vai aparecer no log do Render
-    
+async def receber_contato(request: Request):
     try:
-        # 3. Conexão com Banco de Dados Neon
+        # 1. Força a leitura do JSON bruto
+        data = await request.json()
+        print(f"📦 PAYLOAD RECEBIDO: {data}")
+        
+        # 2. Extrai os dados manualmente
+        nome = data.get("nome")
+        email = data.get("email")
+        mensagem = data.get("mensagem")
+        
+        if not email:
+            raise HTTPException(status_code=400, detail="Campo email obrigatório")
+
+        # 3. Conecta no Neon
         db_url = os.getenv("DATABASE_URL")
         if not db_url:
-            print("❌ ERRO: Variável DATABASE_URL não encontrada!")
-            raise HTTPException(status_code=500, detail="Servidor sem configuração de Banco")
+            print("❌ ERRO: DATABASE_URL não configurada")
+            # Retorna 500 para sabermos que é erro de banco
+            raise HTTPException(status_code=500, detail="Erro de Configuração do Banco")
             
         conn = psycopg2.connect(db_url)
         cur = conn.cursor()
         
-        # Cria a tabela se não existir
         cur.execute("""
             CREATE TABLE IF NOT EXISTS leads (
                 id SERIAL PRIMARY KEY,
@@ -51,20 +55,20 @@ def receber_contato(dado: Contato):
             );
         """)
         
-        # Insere o dado
         cur.execute(
             "INSERT INTO leads (nome, email, mensagem) VALUES (%s, %s, %s)",
-            (dado.nome, dado.email, dado.mensagem)
+            (nome, email, mensagem)
         )
         
         conn.commit()
         cur.close()
         conn.close()
         
-        return {"status": "sucesso", "mensagem": "Lead salvo no Neon!"}
+        return {"status": "sucesso", "mensagem": "Lead gravado com sucesso"}
 
     except Exception as e:
-        print(f"💀 Erro Crítico no Banco: {e}")
+        print(f"💀 Erro: {e}")
+        # Se der erro, devolve 500 com a mensagem real
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
