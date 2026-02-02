@@ -1,26 +1,34 @@
 ---
 title: "Sobre Henrique Oliver"
-description: "Administrador Público (CRA Ativo) e Desenvolvedor Python Sênior."
-featured_image: "/images/capa-site.jpg"
-menu: "main"
-weight: 10
+description: "Especialista em Administração Pública e Tecnologia da Informação"
 ---
 
-### A Convergência entre Lei e Código
+## Quem sou eu
 
-Com uma carreira dedicada à **Administração Pública** e à **Gestão de TI**, percebi cedo que a burocracia estatal e a governança corporativa sofriam do mesmo mal: a ineficiência processual.
+Sou **Henrique Oliver**, especialista em Administração Pública e Tecnologia da Informação, com foco em inovação, automação e uso estratégico de Inteligência Artificial para o setor público e organizações orientadas a impacto.
 
-Minha abordagem é única porque uno dois mundos que raramente conversam:
-1.  **O Rigor Institucional:** Como Administrador com **CRA Ativo**, entendo de Compliance, Lei de Responsabilidade Fiscal e Governança Corporativa.
-2.  **A Agilidade da Engenharia:** Como **Dev Python**, construo robôs e sistemas que executam em segundos o que departamentos levam dias.
+Atuo na interseção entre **gestão, tecnologia e dados**, desenvolvendo soluções que aumentam eficiência, transparência e capacidade decisória.
 
-### Minha Missão
-> *"Transformar departamentos jurídicos e financeiros em hubs de inteligência de dados, eliminando o trabalho manual e mitigando riscos com auditoria automatizada."*
+---
 
-### Stack Tecnológico
-* **Linguagens:** Python (Pandas, NumPy, Scikit-learn), SQL, JavaScript.
-* **Frameworks:** FastAPI (Backend), Streamlit (Dashboards), Hugo (Web).
-* **Infraestrutura:** Docker, Vercel, Render, Google Cloud Platform (BigQuery).
-* **Expertise:** Finanças (ALM), Direito Digital, Análise Geoespacial.
+## O que eu faço
 
-[➡️ Vamos discutir seu projeto?](/contato/)
+- Consultoria em transformação digital  
+- Automação de processos com IA  
+- Arquitetura de soluções para governo e organizações  
+- Estratégia de dados e sistemas de informação  
+
+---
+
+## Abordagem
+
+Trabalho com uma abordagem prática, orientada a resultados e com foco em:
+
+✔️ Eficiência operacional  
+✔️ Clareza estratégica  
+✔️ Escalabilidade tecnológica  
+✔️ Uso responsável de IA  
+
+---
+
+📌 Se quiser conversar sobre um projeto ou ideia, vá até a página de contato.
