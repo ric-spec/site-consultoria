@@ -3,131 +3,186 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Henrique Oliver | Strategic Intelligence Hub</title>
+    <title>Henrique Oliver | Ecosystem</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* TEMA CYBER DARK */
-        :root { --bg: #050505; --card: #0a0a0a; --neon-blue: #00d1ff; --neon-green: #00ff9d; --text: #e0e6ed; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Helvetica Neue', sans-serif; margin: 0; padding-top: 70px; }
+        /* TEMA BASE */
+        :root { --sidebar-bg: #000000; --content-bg: #050505; --neon-green: #00ff9d; --neon-blue: #00d1ff; --text: #ffffff; }
         
-        /* NAVBAR */
-        nav { position: fixed; top: 0; width: 100%; background: rgba(5,5,5,0.95); border-bottom: 1px solid #222; z-index: 1000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; backdrop-filter: blur(10px); }
-        .logo { font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: -1px; color: white; }
-        .logo span { color: var(--neon-blue); }
-        .btn-contact { background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); padding: 8px 20px; font-weight: bold; border-radius: 20px; text-decoration: none; font-size: 0.8rem; transition: 0.3s; }
-        .btn-contact:hover { background: var(--neon-green); color: black; box-shadow: 0 0 15px rgba(0, 255, 157, 0.4); }
+        body { margin: 0; padding: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--content-bg); color: var(--text); overflow-x: hidden; }
 
-        /* HERO */
-        .hero { text-align: center; padding: 6rem 1rem 4rem 1rem; background: radial-gradient(circle at center, #151515 0%, #050505 100%); }
-        .hero h1 { font-size: 4rem; margin-bottom: 0.5rem; line-height: 1; letter-spacing: -3px; color: white; }
-        .hero p { color: #666; font-size: 1.2rem; max-width: 600px; margin: 1rem auto 2.5rem auto; }
-        
-        /* GRID DE APRESENTAÇÕES */
-        .decks-title { text-align: center; margin: 2rem 0 3rem 0; text-transform: uppercase; letter-spacing: 3px; color: var(--neon-blue); font-weight: 800; font-size: 0.8rem; border-top: 1px solid #222; padding-top: 2rem; display: inline-block; width: 100%; }
-        
-        .decks-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(550px, 1fr)); 
-            gap: 50px; 
-            padding: 0 5%; 
-            max-width: 1600px; 
-            margin: 0 auto 5rem auto; 
+        /* --- SIDEBAR GARYVEE STYLE --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--sidebar-bg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid #111;
+            z-index: 1000;
         }
-        @media (max-width: 700px) { .decks-grid { grid-template-columns: 1fr; } .hero h1 { font-size: 2.5rem; } }
 
-        .deck-wrapper { 
-            background: var(--card); 
-            padding: 5px; 
-            border: 1px solid #222; 
-            border-radius: 12px; 
-            transition: 0.3s;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* Logo / Assinatura */
+        .brand-signature {
+            font-family: 'Brush Script MT', cursive; /* Simula assinatura */
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 3rem;
+            text-decoration: none;
+            display: block;
         }
-        .deck-wrapper:hover { border-color: var(--neon-blue); transform: translateY(-5px); }
-        
-        .deck-label { 
-            position: absolute; 
-            top: 15px; 
-            left: 15px; 
-            background: rgba(0,0,0,0.8); 
-            border: 1px solid var(--neon-green); 
-            color: var(--neon-green); 
-            padding: 4px 12px; 
-            font-size: 0.7rem; 
-            font-weight: bold; 
+        .brand-subtitle { font-family: sans-serif; font-size: 0.7rem; color: #666; letter-spacing: 2px; text-transform: uppercase; margin-top: -10px; display: block; }
+
+        /* Links de Navegação */
+        .nav-menu { display: flex; flex-direction: column; gap: 1.5rem; }
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            font-weight: 900; /* Fonte grossa como a do Gary */
+            font-size: 1.1rem;
             text-transform: uppercase;
-            border-radius: 4px;
-            z-index: 10;
-            pointer-events: none; /* Deixa clicar no slide abaixo */
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
+        .nav-item:hover { color: var(--neon-green); }
+        .nav-item.active { color: var(--neon-blue); }
+
+        /* Ícones Sociais (Grid no rodapé da sidebar) */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 2rem;
+        }
+        .social-icon { color: white; font-size: 1.2rem; transition: 0.3s; cursor: pointer; }
+        .social-icon:hover { color: var(--neon-green); transform: scale(1.2); }
+
+        /* Search Icon isolado */
+        .search-trigger { margin-top: 2rem; color: white; font-size: 1.2rem; cursor: pointer; }
+
+        /* --- ÁREA DE CONTEÚDO PRINCIPAL --- */
+        .main-content {
+            margin-left: 280px; /* Empurra o conteúdo para a direita */
+            padding: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at 50% 20%, #151515 0%, #050505 80%);
+        }
+
+        /* Adaptação Mobile (Sidebar vira Topbar) */
+        @media (max-width: 900px) {
+            .sidebar { position: relative; width: 100%; height: auto; flex-direction: row; flex-wrap: wrap; align-items: center; padding: 1rem; }
+            .nav-menu { flex-direction: row; gap: 15px; display: none; } /* Esconde menu no mobile pra simplificar */
+            .main-content { margin-left: 0; }
+            .brand-signature { font-size: 1.5rem; margin-bottom: 0; }
+            .social-grid { display: none; }
+        }
+
+        /* ESTILOS DOS DECKS (MANTIDOS) */
+        .hero-section { padding: 5rem 3rem; text-align: left; border-bottom: 1px solid #222; }
+        .hero-title { font-size: 4rem; font-weight: 900; line-height: 1; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: -2px; }
+        .hero-desc { color: #888; font-size: 1.2rem; max-width: 600px; margin-bottom: 2rem; }
+        
+        .decks-container { padding: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); gap: 40px; }
+        @media (max-width: 1200px) { .decks-container { grid-template-columns: 1fr; } }
+        
+        .deck-card { border: 1px solid #222; background: #080808; padding: 5px; border-radius: 8px; position: relative; transition: 0.3s; }
+        .deck-card:hover { border-color: var(--neon-blue); transform: translateY(-3px); }
+        .label-tag { position: absolute; top: -12px; left: 20px; background: #000; border: 1px solid var(--neon-green); color: var(--neon-green); padding: 2px 10px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; z-index: 10; }
 
         /* MODAL */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-        .modal-box { background: #0f0f0f; padding: 2.5rem; border: 1px solid var(--neon-green); width: 90%; max-width: 450px; text-align: center; border-radius: 12px; }
-        input, textarea { width: 100%; background: #1a1a1a; border: 1px solid #333; color: white; padding: 12px; margin-bottom: 12px; border-radius: 6px; outline: none; }
-        input:focus, textarea:focus { border-color: var(--neon-blue); }
-        .btn-submit { width: 100%; background: var(--neon-green); border: none; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 6px; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s; }
-        .btn-submit:hover { background: white; box-shadow: 0 0 20px var(--neon-green); }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+        .modal-box { background: #111; padding: 2rem; border: 1px solid var(--neon-blue); width: 90%; max-width: 450px; }
+        input, textarea { width: 100%; background: #222; border: 1px solid #333; color: white; padding: 12px; margin-bottom: 10px; }
+        .btn-action { background: var(--neon-green); color: black; padding: 12px 30px; border: none; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 0.9rem; }
 
     </style>
 </head>
 <body>
 
-    <nav>
-        <div class="logo">HO<span>.SYSTEM</span></div>
-        <a href="#" onclick="openModal()" class="btn-contact">ACESSAR INTELLIGENCE</a>
-    </nav>
+    <aside class="sidebar">
+        <div>
+            <a href="#" class="brand-signature">Henrique Oliver</a>
+            <span class="brand-subtitle">Intelligence Hub</span>
 
-    <header class="hero">
-        <h1>STRATEGIC<br><span style="color: var(--neon-blue);">INTELLIGENCE</span> HUB</h1>
-        <p>A fusão técnica entre Administração Pública, Finanças Corporativas (ALM) e Redes Neurais. Explore os sistemas interativos abaixo.</p>
-    </header>
+            <nav class="nav-menu" style="margin-top: 4rem;">
+                <a href="#" class="nav-item active">ECOSYSTEM</a>
+                <a href="#" class="nav-item">FINANCE (ALM)</a>
+                <a href="#" class="nav-item">GOV. COMPLIANCE</a>
+                <a href="#" class="nav-item">NEURAL NETS</a>
+                <a href="#" onclick="openModal()" class="nav-item">CONTACT</a>
+            </nav>
+            
+            <div class="search-trigger"><i class="fas fa-search"></i></div>
+        </div>
 
-    <div class="decks-title">/// Select System Protocol</div>
+        <div class="social-grid">
+            <i class="fab fa-linkedin social-icon"></i>
+            <i class="fab fa-github social-icon"></i>
+            <i class="fab fa-instagram social-icon"></i>
+            <i class="fab fa-youtube social-icon"></i>
+            <i class="fab fa-twitter social-icon"></i>
+            <i class="fab fa-tiktok social-icon"></i>
+            <i class="fab fa-discord social-icon"></i>
+            <i class="fas fa-envelope social-icon" onclick="openModal()"></i>
+        </div>
+    </aside>
 
-    <div class="decks-grid">
+    <main class="main-content">
         
-        <div class="deck-wrapper">
-            <div class="deck-label">SYSTEM: LEAN FINANCE</div>
-            <iframe src="https://gamma.app/embed/4924gbpda580wu8" style="width: 100%; height: 500px; border: none;" allow="fullscreen" title="Lean Finance"></iframe>
+        <section class="hero-section">
+            <h1 class="hero-title">A Engenharia<br><span style="color: var(--neon-blue);">da Decisão.</span></h1>
+            <p class="hero-desc">Administração Pública e Finanças Corporativas potencializadas por Redes Neurais. Explore os sistemas de inteligência abaixo.</p>
+            <button class="btn-action" onclick="openModal()">INICIAR PROTOCOLO IA</button>
+        </section>
+
+        <div class="decks-container">
+            
+            <div class="deck-card">
+                <span class="label-tag">LEAN FINANCE</span>
+                <iframe src="https://gamma.app/embed/4924gbpda580wu8" style="width: 100%; height: 500px; border: none;" allow="fullscreen"></iframe>
+            </div>
+
+            <div class="deck-card">
+                <span class="label-tag" style="border-color: var(--neon-blue); color: var(--neon-blue);">M&A ENGINE</span>
+                <iframe src="https://gamma.app/embed/dq8pjuehuaz11i3" style="width: 100%; height: 500px; border: none;" allow="fullscreen"></iframe>
+            </div>
+
+            <div class="deck-card">
+                <span class="label-tag" style="border-color: #ff0055; color: #ff0055;">NEURAL NETWORKS</span>
+                <iframe src="https://gamma.app/embed/u8hjrh5jwf9iyme" style="width: 100%; height: 500px; border: none;" allow="fullscreen"></iframe>
+            </div>
+
+            <div class="deck-card">
+                <span class="label-tag" style="border-color: #ffcc00; color: #ffcc00;">GEO-INTEL MG</span>
+                <iframe src="https://gamma.app/embed/1mrmlvwa74y6d9v" style="width: 100%; height: 500px; border: none;" allow="fullscreen"></iframe>
+            </div>
+
         </div>
 
-        <div class="deck-wrapper">
-            <div class="deck-label" style="border-color: var(--neon-blue); color: var(--neon-blue);">SYSTEM: M&A ENGINE</div>
-            <iframe src="https://gamma.app/embed/dq8pjuehuaz11i3" style="width: 100%; height: 500px; border: none;" allow="fullscreen" title="M&A Engine"></iframe>
-        </div>
+        <footer style="padding: 2rem 3rem; color: #333; font-size: 0.8rem;">
+            © 2026 Henrique Oliver Ecosystem.
+        </footer>
+    </main>
 
-        <div class="deck-wrapper">
-            <div class="deck-label" style="border-color: #ff0055; color: #ff0055;">SYSTEM: NEURAL NETS</div>
-            <iframe src="https://gamma.app/embed/u8hjrh5jwf9iyme" style="width: 100%; height: 500px; border: none;" allow="fullscreen" title="Rede Neural"></iframe>
-        </div>
-
-        <div class="deck-wrapper">
-            <div class="deck-label" style="border-color: #ffcc00; color: #ffcc00;">SYSTEM: GEO-INTEL MG</div>
-            <iframe src="https://gamma.app/embed/1mrmlvwa74y6d9v" style="width: 100%; height: 500px; border: none;" allow="fullscreen" title="Inteligência Territorial"></iframe>
-        </div>
-
-    </div>
-
-    <footer style="text-align: center; padding: 2rem 0; color: #444; font-size: 0.75rem; border-top: 1px solid #111;">
-        © 2026 Henrique Oliver Ecosystem. Secure Connection.
-    </footer>
-
-    <div id="contactModal" class="modal">
+    <div id="contactModal" class="modal-overlay">
         <div class="modal-box">
-            <span onclick="closeModal()" style="float: right; cursor: pointer; color: #666; font-size: 1.5rem;">&times;</span>
-            <h3 style="color: var(--neon-green); margin-top: 0; text-transform: uppercase;">Agente de IA</h3>
-            <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Identifique-se para iniciar o protocolo de atendimento.</p>
-            <form id="form">
-                <input type="text" id="nome" placeholder="NOME DE ACESSO" required>
-                <input type="email" id="email" placeholder="E-MAIL CORPORATIVO" required>
-                <textarea id="msg" rows="3" placeholder="INTENÇÃO / DEMANDA..." required></textarea>
-                <button type="submit" class="btn-submit">INICIAR PROTOCOLO</button>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+                <h3 style="color:var(--neon-green); margin:0;">AGENTE DE IA</h3>
+                <i class="fas fa-times" style="cursor:pointer; color:#666;" onclick="closeModal()"></i>
+            </div>
+            <form id="aiForm">
+                <input type="text" id="nome" placeholder="NOME" required>
+                <input type="email" id="email" placeholder="E-MAIL" required>
+                <textarea id="msg" rows="4" placeholder="MENSAGEM..." required></textarea>
+                <button type="submit" class="btn-action" style="width:100%;">ENVIAR</button>
             </form>
-            <div id="status" style="margin-top: 15px; font-weight: bold; font-size: 0.9rem;"></div>
+            <div id="status" style="margin-top:10px; font-weight:bold;"></div>
         </div>
     </div>
 
@@ -135,14 +190,11 @@
         function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
 
-        // Conexão com Render + Neon
-        document.getElementById('form').addEventListener('submit', async (e) => {
+        document.getElementById('aiForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = e.target.querySelector('button');
             const status = document.getElementById('status');
-            
-            btn.innerHTML = "PROCESSANDO...";
-            btn.style.opacity = "0.7";
+            btn.innerText = "PROCESSANDO...";
             
             try {
                 const res = await fetch('https://agente-consultoria.onrender.com/contato', {
@@ -156,14 +208,13 @@
                 });
                 if(res.ok) {
                     status.style.color = "#00ff9d";
-                    status.innerText = "✅ ACESSO REGISTRADO NO BANCO DE DADOS.";
-                    setTimeout(() => { closeModal(); btn.innerHTML = "INICIAR PROTOCOLO"; btn.style.opacity = "1"; status.innerText = ""; }, 2000);
+                    status.innerText = "✅ SUCESSO!";
+                    setTimeout(() => { closeModal(); btn.innerText = "ENVIAR"; status.innerText = ""; }, 2000);
                 } else { throw new Error(); }
             } catch (err) {
-                status.style.color = "#ff3333";
-                status.innerText = "⚠️ FALHA DE COMUNICAÇÃO COM O SERVIDOR.";
-                btn.innerHTML = "TENTAR NOVAMENTE";
-                btn.style.opacity = "1";
+                status.style.color = "red";
+                status.innerText = "ERRO.";
+                btn.innerText = "TENTAR NOVAMENTE";
             }
         });
     </script>
