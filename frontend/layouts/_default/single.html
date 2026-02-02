@@ -6,109 +6,62 @@
     <title>{{ .Title }} | Henrique Oliver</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
     <style>
-        :root { --dark: #0f172a; --blue: #2563eb; --success: #10b981; }
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #334155; background-color: #f8fafc; margin: 0; }
+        :root { --bg: #0b0f19; --card: #161b22; --accent: #00d1ff; --bull: #00ff88; --bear: #ff3333; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: #e6edf3; margin: 0; }
         
-        /* Hero Section */
-        .hero { background: var(--dark); color: white; padding: 4rem 1rem; text-align: center; border-bottom: 5px solid var(--blue); }
+        /* Estilo Bolsa de Valores */
+        .ticker-bar { background: #000; padding: 5px; font-family: monospace; font-size: 12px; color: var(--bull); overflow: hidden; white-space: nowrap; border-bottom: 1px solid #333; }
         
-        /* Container Principal */
-        .content { max-width: 800px; margin: -3rem auto 4rem; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); position: relative; }
-        
-        /* Títulos */
-        h2 { color: var(--dark); border-left: 5px solid var(--blue); padding-left: 1rem; margin-top: 2.5rem; font-size: 1.5rem; }
-        
-        /* Formulário de IA */
-        .ai-form { background: #f1f5f9; padding: 2rem; border-radius: 8px; margin-top: 3rem; border: 1px solid #e2e8f0; }
-        .form-input { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #cbd5e1; border-radius: 4px; box-sizing: border-box; }
-        .btn { background: var(--blue); color: white; padding: 1rem 2rem; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; transition: background 0.3s; }
-        .btn:hover { background: #1d4ed8; }
-        .btn:disabled { background: #94a3b8; cursor: wait; }
-        
-        /* Status Messages */
-        #status-msg { margin-top: 1rem; text-align: center; font-weight: bold; display: none; padding: 10px; border-radius: 4px; }
-        .success { background-color: #d1fae5; color: #065f46; }
-        .error { background-color: #fee2e2; color: #991b1b; }
+        .hero { padding: 5rem 1rem; text-align: center; background: radial-gradient(circle at center, #1e293b 0%, #0b0f19 100%); position: relative; }
+        .hero h1 { font-size: 3.5rem; letter-spacing: -2px; margin-bottom: 0.5rem; color: #fff; }
+        .hero .subtitle { color: var(--accent); font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
 
-        .footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.875rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: -4rem auto 4rem; padding: 0 1rem; }
+        
+        .sector-card { background: var(--card); border: 1px solid #30363d; padding: 2rem; border-radius: 12px; transition: transform 0.3s; }
+        .sector-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+        
+        .tag-public { background: rgba(0, 209, 255, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .tag-private { background: rgba(0, 255, 136, 0.1); color: var(--bull); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+
+        .content-body { max-width: 800px; margin: 0 auto; line-height: 1.8; color: #8b949e; }
+        .btn-trade { background: var(--bull); color: #000; padding: 1rem 2.5rem; border-radius: 5px; text-decoration: none; font-weight: bold; display: inline-block; transition: 0.3s; }
+        .btn-trade:hover { box-shadow: 0 0 20px rgba(0, 255, 136, 0.4); }
     </style>
 </head>
 <body>
+    <div class="ticker-bar">
+        GOV_INDEX +2.4% ▲ COMPLIANCE_RISK -1.2% ▼ ALM_OPTIMIZATION +4.7% ▲ M&A_DEAL_FLOW ACTIVE ▲
+    </div>
+
     <header class="hero">
-        <h1 class="f2 f1-ns mb2">{{ .Title }}</h1>
-        <p class="f4-ns f5 white-80 measure-wide center">{{ .Description }}</p>
+        <div class="subtitle">Estrategista em Finanças & Gestão Pública</div>
+        <h1>Henrique Oliver</h1>
+        <p class="f4-ns f5 white-50 mw7 center">Unindo o rigor do CRA Ativo à inteligência de dados aplicada ao Capital Privado e ao Setor Público.</p>
     </header>
 
-    <main class="content">
+    <div class="grid">
+        <div class="sector-card">
+            <span class="tag-public">SETOR PÚBLICO</span>
+            <h3 class="brand-blue mt3">Gestão de Governo</h3>
+            <p class="f6 lh-copy">Estruturação de processos sob a Lei de Responsabilidade Fiscal e compliance administrativo. Auditoria de dados para transparência e eficiência pública.</p>
+        </div>
+        <div class="sector-card">
+            <span class="tag-private">SETOR PRIVADO</span>
+            <h3 class="bull mt3">M&A e Corporate Finance</h3>
+            <p class="f6 lh-copy">Valuation, Due Diligence e modelagem financeira para fusões e aquisições. Otimização de portfólio (ALM) baseada em algoritmos de risco.</p>
+        </div>
+    </div>
+
+    <main class="content-body ph3">
         {{ .Content }}
-
-        <div id="contato" class="ai-form">
-            <h3 class="f3 mt0 mb3 tc brand-dark">🤖 Falar com Agente de IA</h3>
-            <p class="tc f6 mb4">Descreva sua necessidade. Minha IA analisará e agendará o próximo passo.</p>
-            
-            <form id="contactForm">
-                <label class="f6 b db mb2">Seu Nome</label>
-                <input type="text" id="nome" class="form-input" placeholder="Ex: Dr. Roberto" required>
-
-                <label class="f6 b db mb2">Seu E-mail Corporativo</label>
-                <input type="email" id="email" class="form-input" placeholder="contato@empresa.com" required>
-
-                <label class="f6 b db mb2">Como posso ajudar?</label>
-                <textarea id="mensagem" class="form-input" rows="4" placeholder="Ex: Preciso auditar processos de licitação..." required></textarea>
-
-                <button type="submit" id="submitBtn" class="btn">🚀 Enviar para Análise</button>
-            </form>
-            <div id="status-msg"></div>
+        <div class="tc mv5">
+            <a href="/contato/" class="btn-trade">SOLICITAR ANÁLISE ESTRATÉGICA</a>
         </div>
     </main>
 
-    <footer class="footer">
-        © {{ now.Format "2006" }} Henrique Oliver - CRA Ativo & Python Specialist
+    <footer class="tc pa4 silver f7">
+        © 2026 Henrique Oliver | CRA Ativo | Finance & Tech Analyst
     </footer>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btn = document.getElementById('submitBtn');
-            const msgDiv = document.getElementById('status-msg');
-            const data = {
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                mensagem: document.getElementById('mensagem').value
-            };
-
-            // Efeito de carregamento (Importante para Render Free Tier)
-            btn.disabled = true;
-            btn.innerText = "⏳ A IA está processando (pode levar até 50s)...";
-            msgDiv.style.display = 'none';
-
-            try {
-                // Tenta conectar com o Backend (A URL será injetada aqui)
-                const response = await fetch('https://agente-consultoria.onrender.com/contato', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    msgDiv.innerText = "✅ Recebido! Minha IA já catalogou sua solicitação no Neon.tech.";
-                    msgDiv.className = "success";
-                    msgDiv.style.display = 'block';
-                    document.getElementById('contactForm').reset();
-                    btn.innerText = "Enviado com Sucesso";
-                } else {
-                    throw new Error('Erro na API');
-                }
-            } catch (error) {
-                console.error(error);
-                msgDiv.innerText = "⚠️ O Agente está dormindo ou offline. Tente novamente em 1 minuto.";
-                msgDiv.className = "error";
-                msgDiv.style.display = 'block';
-                btn.disabled = false;
-                btn.innerText = "Tentar Novamente";
-            }
-        });
-    </script>
 </body>
 </html>
