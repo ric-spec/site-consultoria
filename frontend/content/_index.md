@@ -1,37 +1,65 @@
 ---
-title: "Gestão Estratégica & Inteligência de Dados"
-description: "Unindo a segurança jurídica da Administração Pública à agilidade do Python."
-featured_image: "/images/capa-site.jpg"
+title: "Henrique Oliver – Administração Pública, Tecnologia e IA"
+description: "Consultoria em transformação digital, automação e inteligência artificial para o setor público e organizações orientadas a impacto."
 ---
 
-<div id="sobre" class="pa3 pa4-ns">
-  <h2 class="f2 fw6 brand-color">O Perfil</h2>
-  <p class="f4 lh-copy measure-wide">
-    Sou especialista em <strong>Finanças Corporativas, Governança e Gestão de TI</strong>, além de bacharel em Administração Pública com <strong>CRA ativo</strong>.
-    Minha atuação combina o rigor das normas institucionais com a capacidade moderna de automação e análise de dados.
-  </p>
-</div>
+<!-- HERO -->
+<section id="hero">
 
-<div id="servicos" class="pa3 pa4-ns bg-white">
-  <h2 class="f2 fw6 brand-color">Áreas de Atuação</h2>
-  <div class="flex flex-wrap">
-    <div class="w-100 w-33-l ph2">
-      <h3 class="f3 mv2">🏛️ Governança & Compliance</h3>
-      <p class="lh-copy">Estruturação de processos auditáveis e gestão pública eficiente.</p>
-    </div>
-    <div class="w-100 w-33-l ph2">
-      <h3 class="f3 mv2">🐍 Automação com Python</h3>
-      <p class="lh-copy">Desenvolvimento de scripts para auditoria, migração de dados e robôs de processos.</p>
-    </div>
-    <div class="w-100 w-33-l ph2">
-      <h3 class="f3 mv2">💰 Gestão Financeira</h3>
-      <p class="lh-copy">Análise de balanços, valuation e estratégias de fusão e aquisição.</p>
-    </div>
-  </div>
-  
-  <div class="tc mt5">
-    <a href="/contato/" class="f4 no-underline grow dib v-mid bg-blue white ba b--blue ph3 pv2 mb3">
-      🚀 Iniciar Atendimento via IA
-    </a>
-  </div>
-</div>
+# Transformação Digital com IA para o Setor Público
+
+**Administração Pública + Tecnologia da Informação + Inteligência Artificial**  
+Soluções práticas para eficiência, transparência e decisão estratégica.
+
+[👉 Falar com o Agente IA](/contato/)
+
+</section>
+
+---
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+
+## Serviços
+
+### 🧠 Agentes de IA e Automação
+Implantação de agentes inteligentes para atendimento, triagem, análise e suporte decisório.
+
+### ⚙️ Automação de Processos
+Mapeamento e digitalização de fluxos administrativos com foco em eficiência e escalabilidade.
+
+### 📊 Sistemas de Informação
+Dashboards, integrações e plataformas para controle, gestão e transparência.
+
+### 🏛️ Inovação no Setor Público
+Projetos orientados à modernização, governo digital e uso estratégico de dados.
+
+</section>
+
+---
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+
+## Diferenciais
+
+✔️ Especialização em Administração Pública + TI  
+✔️ Foco em resultado, não em buzzwords  
+✔️ Uso ético e responsável de IA  
+✔️ Comunicação clara com gestores e equipes técnicas  
+✔️ Soluções sob medida para contextos reais
+
+</section>
+
+---
+
+<!-- CTA -->
+<section id="cta">
+
+## Vamos conversar?
+
+Se você quer aplicar tecnologia e IA de forma **estratégica e viável**, o próximo passo é simples:
+
+[🚀 Iniciar conversa com o Agente IA](/contato/)
+
+</section>
