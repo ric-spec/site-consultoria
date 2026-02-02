@@ -3,212 +3,158 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Henrique Oliver | Finanças & Governo</title>
+    <title>Henrique Oliver | Strategic Intelligence Hub</title>
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* CORES E VARIÁVEIS CYBER */
-        :root { 
-            --bg: #0b0f19; 
-            --card-bg: #111625; 
-            --neon-green: #00ff9d; 
-            --neon-blue: #00d1ff; 
-            --text-main: #e0e6ed; 
-            --text-dim: #94a3b8;
+        /* BASE THEME */
+        :root { --bg: #080808; --card: #121212; --neon-blue: #00d1ff; --neon-green: #00ff9d; --text: #e0e6ed; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Helvetica Neue', sans-serif; margin: 0; padding-top: 60px; }
+        
+        /* NAV */
+        nav { position: fixed; top: 0; width: 100%; background: rgba(0,0,0,0.9); border-bottom: 1px solid #222; z-index: 1000; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: -1px; color: white; }
+        .logo span { color: var(--neon-blue); }
+        .btn-contact { background: var(--neon-green); color: black; padding: 8px 16px; font-weight: bold; border-radius: 4px; text-decoration: none; font-size: 0.8rem; }
+
+        /* HERO */
+        .hero { text-align: center; padding: 5rem 1rem; background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; line-height: 1.1; letter-spacing: -2px; }
+        .hero p { color: #888; font-size: 1.2rem; max-width: 600px; margin: 0 auto 2rem auto; }
+        
+        /* GRID DE APRESENTAÇÕES (GAMMA) */
+        .decks-title { text-align: center; margin: 4rem 0 2rem 0; text-transform: uppercase; letter-spacing: 2px; color: var(--neon-blue); font-weight: bold; font-size: 0.9rem; }
+        
+        .decks-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); 
+            gap: 40px; 
+            padding: 0 5%; 
+            max-width: 1600px; 
+            margin: 0 auto; 
         }
-        
-        body { background-color: var(--bg); color: var(--text-main); font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-        
-        /* TICKER FINANCEIRO */
-        .ticker-wrap { background: #000; border-bottom: 1px solid #333; overflow: hidden; height: 30px; line-height: 30px; }
-        .ticker { display: inline-block; white-space: nowrap; animation: ticker 20s infinite linear; color: var(--neon-green); font-family: monospace; font-size: 12px; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+        @media (max-width: 700px) { .decks-grid { grid-template-columns: 1fr; } }
 
-        /* HERO SECTION */
-        .hero { 
-            background: radial-gradient(circle at 50% 10%, #1e293b 0%, var(--bg) 80%); 
-            padding: 4rem 1rem; 
-            text-align: center; 
-            border-bottom: 1px solid #333;
-        }
-        .hero h1 { font-size: 3rem; margin: 0; letter-spacing: -2px; color: white; text-shadow: 0 0 20px rgba(0, 209, 255, 0.3); }
-        .hero p { color: var(--neon-blue); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: bold; margin-top: 10px; }
-
-        /* GRID DE CONTEÚDO */
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: -3rem; }
-        
-        /* CARDS */
-        .card { background: var(--card-bg); border-radius: 12px; padding: 2rem; border: 1px solid #2d3748; transition: transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5); }
-        .card-finance { border-top: 4px solid var(--neon-blue); }
-        .card-public { border-top: 4px solid var(--neon-green); }
-        
-        h2 { color: white; font-size: 1.5rem; margin-top: 0; display: flex; align-items: center; gap: 10px; }
-        .icon { font-size: 1.2rem; }
-
-        /* CONTEÚDO MARKDOWN (O que vem do _index.md) */
-        .markdown-content { max-width: 800px; margin: 3rem auto; background: #161b22; padding: 2rem; border-radius: 8px; border-left: 4px solid var(--text-dim); }
-        .markdown-content h2 { color: var(--neon-green); font-size: 1.4rem; margin-top: 1.5rem; border-bottom: 1px solid #333; padding-bottom: 0.5rem; }
-        
-        /* BOTÃO */
-        .btn-glow { 
-            background: transparent; 
-            color: var(--neon-green); 
-            border: 2px solid var(--neon-green); 
-            padding: 1rem 2rem; 
-            font-weight: bold; 
-            text-decoration: none; 
-            border-radius: 4px; 
-            display: inline-block; 
-            margin-top: 2rem; 
+        .deck-wrapper { 
+            background: var(--card); 
+            padding: 10px; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
             transition: 0.3s;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            position: relative;
         }
-        .btn-glow:hover { background: var(--neon-green); color: black; box-shadow: 0 0 20px rgba(0, 255, 157, 0.4); }
+        .deck-wrapper:hover { border-color: var(--neon-green); box-shadow: 0 0 30px rgba(0, 255, 157, 0.1); }
+        
+        .deck-label { 
+            position: absolute; 
+            top: -15px; 
+            left: 20px; 
+            background: black; 
+            border: 1px solid var(--neon-blue); 
+            color: var(--neon-blue); 
+            padding: 5px 15px; 
+            font-size: 0.75rem; 
+            font-weight: bold; 
+            text-transform: uppercase;
+        }
 
         /* MODAL */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(5px); z-index: 999; justify-content: center; align-items: center; }
-        .modal-box { background: var(--card-bg); padding: 2rem; width: 90%; max-width: 500px; border-radius: 12px; border: 1px solid var(--neon-blue); box-shadow: 0 0 40px rgba(0, 209, 255, 0.2); position: relative; }
-        .close-modal { position: absolute; top: 10px; right: 15px; color: white; cursor: pointer; font-size: 24px; }
-        
-        input, textarea { width: 100%; background: #0b0f19; border: 1px solid #333; color: white; padding: 12px; margin-bottom: 10px; border-radius: 4px; box-sizing: border-box; }
-        input:focus, textarea:focus { outline: none; border-color: var(--neon-blue); }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-box { background: #111; padding: 2rem; border: 1px solid var(--neon-green); width: 90%; max-width: 400px; text-align: center; }
+        input, textarea { width: 100%; background: #222; border: 1px solid #444; color: white; padding: 10px; margin-bottom: 10px; }
+        .btn-submit { width: 100%; background: var(--neon-green); border: none; padding: 10px; font-weight: bold; cursor: pointer; }
 
     </style>
 </head>
 <body>
 
-    <div class="ticker-wrap">
-        <div class="ticker">
-            HENRIQUE OLIVER ASSOCIATES ▲ COMPLIANCE PÚBLICO ATIVO ▲ NEXUS PRIME ALM: OTIMIZADO ▲ INTEGRAÇÃO GOVERNO-MERCADO ▲
-        </div>
-    </div>
+    <nav>
+        <div class="logo">Henrique<span>Oliver</span></div>
+        <a href="#" onclick="openModal()" class="btn-contact">FALAR COM AGENTE</a>
+    </nav>
 
     <header class="hero">
-        <p>Especialista em Finanças & Administração Pública</p>
-        <h1>HENRIQUE OLIVER</h1>
-        <div style="margin-top: 1rem; color: #94a3b8;">CRA Ativo | Python Specialist | M&A Strategy</div>
-        <button onclick="openModal()" class="btn-glow">SOLICITAR ANÁLISE ESTRATÉGICA</button>
+        <h1>INTELLIGENCE HUB</h1>
+        <p>A fusão entre Administração Pública, Finanças Corporativas e Redes Neurais. Explore os sistemas abaixo.</p>
+        <button onclick="openModal()" style="background: transparent; border: 1px solid #555; color: #fff; padding: 10px 30px; cursor: pointer; border-radius: 20px;">SOLICITAR BRIEFING</button>
     </header>
 
-    <div class="container">
-        <div class="grid-2">
-            <div class="card card-finance">
-                <h2><span class="icon">📈</span> Finanças Corporativas</h2>
-                <div style="height: 200px; width: 100%;">
-                    <canvas id="financeChart"></canvas>
-                </div>
-                <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 10px;">
-                    Simulação de Fronteira Eficiente (Markowitz). Otimização de ativos com menor volatilidade.
-                </p>
-            </div>
+    <div class="decks-title">/// Strategic Decks & Systems</div>
 
-            <div class="card card-public">
-                <h2><span class="icon">🏛️</span> Gestão Pública</h2>
-                <ul style="list-style: none; padding: 0; color: #e0e6ed;">
-                    <li style="margin-bottom: 10px;">✅ <strong>Auditoria Digital:</strong> Conformidade total com LRF e Tribunais de Contas.</li>
-                    <li style="margin-bottom: 10px;">✅ <strong>Geo-Política:</strong> Mapeamento de bases eleitorais com Big Data.</li>
-                    <li>✅ <strong>Segurança:</strong> Processos blindados por algoritmos.</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="markdown-content">
-            {{ .Content }}
-        </div>
+    <div class="decks-grid">
         
-        <footer style="text-align: center; color: #555; margin-top: 4rem; font-size: 0.8rem;">
-            © 2026 Henrique Oliver. Todos os direitos reservados.
-        </footer>
+        <div class="deck-wrapper">
+            <div class="deck-label">FINANÇAS: ALM & LEAN</div>
+            <iframe src="https://gamma.app/embed/4924gbpda580wu8" style="width: 100%; height: 450px; border: none;" allow="fullscreen" title="Lean Finance: Gestão do Ciclo de Vida de Aplicações (ALM)"></iframe>
+        </div>
+
+        <div class="deck-wrapper">
+            <div class="deck-label">M&A INSIGHT ENGINE</div>
+            <iframe src="https://gamma.app/embed/dq8pjuehuaz11i3" style="width: 100%; height: 450px; border: none;" allow="fullscreen" title="M&A Insight Engine"></iframe>
+        </div>
+
+        <div class="deck-wrapper">
+            <div class="deck-label">AI & REDES NEURAIS</div>
+            <iframe src="https://gamma.app/embed/u8hjrh5jwf9iyme" style="width: 100%; height: 450px; border: none;" allow="fullscreen" title="Desvende o Futuro: Rede Neural Avançada"></iframe>
+        </div>
+
+        <div class="deck-wrapper">
+            <div class="deck-label">GOVERNO: INTELIGÊNCIA MG</div>
+            <iframe src="https://gamma.app/embed/1mrmlvwa74y6d9v" style="width: 100%; height: 450px; border: none;" allow="fullscreen" title="Inteligência Territorial de Minas Gerais"></iframe>
+        </div>
+
     </div>
 
-    <div id="contactModal" class="modal-overlay">
+    <footer style="text-align: center; padding: 4rem 0; color: #555; font-size: 0.8rem;">
+        © 2026 Henrique Oliver Ecosystem. Powered by Vercel, Render & Neon.
+    </footer>
+
+    <div id="contactModal" class="modal">
         <div class="modal-box">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 style="color: var(--neon-blue); margin-top: 0;">🤖 Agente Inteligente</h2>
-            <p style="color: #94a3b8; font-size: 0.9rem;">Seus dados serão processados via API segura e armazenados no Neon.tech.</p>
-            
-            <form id="aiForm">
-                <input type="text" id="nome" placeholder="Seu Nome" required>
-                <input type="email" id="email" placeholder="E-mail Corporativo" required>
-                <textarea id="msg" rows="4" placeholder="Descreva sua necessidade (Ex: Auditoria, Valuation...)" required></textarea>
-                <button type="submit" id="submitBtn" class="btn-glow" style="width: 100%; margin-top: 10px;">ENVIAR</button>
+            <span onclick="closeModal()" style="float: right; cursor: pointer; color: #fff;">&times;</span>
+            <h3 style="color: var(--neon-green); margin-top: 0;">Agente de IA</h3>
+            <p style="color: #aaa; font-size: 0.9rem;">Qual deck despertou seu interesse?</p>
+            <form id="form">
+                <input type="text" id="nome" placeholder="Nome" required>
+                <input type="email" id="email" placeholder="E-mail" required>
+                <textarea id="msg" rows="3" placeholder="Mensagem..." required></textarea>
+                <button type="submit" class="btn-submit">ENVIAR</button>
             </form>
-            <div id="statusMsg" style="margin-top: 15px; text-align: center; font-weight: bold;"></div>
+            <div id="status" style="margin-top: 10px; font-weight: bold;"></div>
         </div>
     </div>
 
     <script>
-        // Lógica do Modal
         function openModal() { document.getElementById('contactModal').style.display = 'flex'; }
         function closeModal() { document.getElementById('contactModal').style.display = 'none'; }
 
-        // Gráfico Chart.js
-        const ctx = document.getElementById('financeChart').getContext('2d');
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
-                datasets: [{
-                    label: 'Performance Otimizada',
-                    data: [12, 19, 15, 25, 30],
-                    borderColor: '#00d1ff',
-                    backgroundColor: 'rgba(0, 209, 255, 0.1)',
-                    borderWidth: 2,
-                    fill: true,
-                    tension: 0.4,
-                    pointRadius: 3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: { grid: { color: '#333' }, ticks: { color: '#666' } },
-                    y: { grid: { color: '#333' }, ticks: { color: '#666' } }
-                }
-            }
-        });
-
-        // Envio do Formulário (Render + Neon)
-        document.getElementById('aiForm').addEventListener('submit', async (e) => {
+        document.getElementById('form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const msg = document.getElementById('statusMsg');
+            const btn = e.target.querySelector('button');
+            const status = document.getElementById('status');
+            btn.innerHTML = "Processando...";
             
-            btn.innerHTML = "⏳ PROCESSANDO...";
-            btn.disabled = true;
-
-            const data = {
-                nome: document.getElementById('nome').value,
-                email: document.getElementById('email').value,
-                mensagem: document.getElementById('msg').value
-            };
-
             try {
-                // Substitua pela URL real do seu Render se for diferente
-                const response = await fetch('https://agente-consultoria.onrender.com/contato', {
+                // URL DO SEU RENDER
+                const res = await fetch('https://agente-consultoria.onrender.com/contato', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        nome: document.getElementById('nome').value,
+                        email: document.getElementById('email').value,
+                        mensagem: document.getElementById('msg').value
+                    })
                 });
-
-                if (response.ok) {
-                    msg.style.color = '#00ff9d';
-                    msg.innerText = "✅ RECEBIDO! Agente registrou no banco de dados.";
-                    setTimeout(() => { closeModal(); btn.disabled = false; btn.innerText = "ENVIAR"; msg.innerText = ""; document.getElementById('aiForm').reset(); }, 3000);
-                } else {
-                    throw new Error('Erro API');
-                }
+                if(res.ok) {
+                    status.style.color = "#00ff9d";
+                    status.innerText = "✅ Registrado no Neon!";
+                    setTimeout(closeModal, 2000);
+                } else { throw new Error(); }
             } catch (err) {
-                msg.style.color = '#ff3333';
-                msg.innerText = "⚠️ Erro de conexão. Tente novamente.";
-                btn.disabled = false;
-                btn.innerText = "TENTAR NOVAMENTE";
+                status.style.color = "red";
+                status.innerText = "⚠️ Erro de conexão";
+            } finally {
+                btn.innerHTML = "ENVIAR";
             }
         });
     </script>
