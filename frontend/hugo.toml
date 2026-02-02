@@ -1,22 +1,18 @@
-baseURL = '/'
-languageCode = 'pt-br'
-title = 'Henrique Oliver'
-theme = 'meutema'
+baseURL = "https://site-consultoria-pd8r.vercel.app/"
+languageCode = "pt-br"
+title = "Henrique Oliver"
+theme = "meutema"
 
 [params]
   description = "Especialista em Administração Pública e Tecnologia da Informação."
-  # Imagem de fundo que acabamos de baixar
   featured_image = "/images/capa-site.jpg"
   favicon = "/favicon.svg"
-  
-  # Cores do Tema (Sobreposição escura para o texto brilhar)
   body_classes = "avenir bg-near-white"
 
-  # Links de Redes Sociais (Aparecem no rodapé)
   [[params.social]]
     name = "LinkedIn"
     icon = "linkedin"
-    url = "https://www.linkedin.com/in/henriqueoliver/" # Ajuste se necessário
+    url = "https://www.linkedin.com/in/henriqueoliver/"
 
   [[params.social]]
     name = "GitHub"
@@ -26,30 +22,24 @@ theme = 'meutema'
 [menu]
   [[menu.main]]
     identifier = "sobre"
-    name = "Sobre Mim"
-    url = "/#sobre"
-    weight = 10
-  
+    name = "Sobre Henrique Oliver"
+    url = "/sobre/"
+    weight = 5
+
   [[menu.main]]
     identifier = "servicos"
     name = "Serviços & Projetos"
     url = "/#servicos"
-    weight = 20
+    weight = 10
+
+  [[menu.main]]
+    identifier = "portfolios"
+    name = "Portfólio & Cases"
+    url = "/projetos/"
+    weight = 15
 
   [[menu.main]]
     identifier = "contato"
     name = "Falar com Agente IA"
     url = "/contato/"
-    weight = 30
-
-[[menu.main]]
-  identifier = "projetos"
-  name = "Portfólio & Cases"
-  url = "/projetos/"
-  weight = 15
-
-[[menu.main]]
-  identifier = "sobre"
-  name = "Sobre Mim"
-  url = "/sobre/"
-  weight = 5
+    weight = 20
