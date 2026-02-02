@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ .Title }} | Henrique Oliver</title>
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.12.0/css/tachyons.min.css"/>
+    <style>
+        :root { --dark: #0f172a; --blue: #2563eb; }
+        body { font-family: sans-serif; line-height: 1.6; color: #334155; background-color: #f8fafc; margin: 0; }
+        .hero { background: var(--dark); color: white; padding: 4rem 2rem; text-align: center; border-bottom: 5px solid var(--blue); }
+        .content { max-width: 800px; margin: -2rem auto 4rem; padding: 2rem; background: white; border-radius: 8px; shadow-4: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: var(--dark); border-left: 5px solid var(--blue); padding-left: 1rem; margin-top: 2rem; }
+        .btn { background: var(--blue); color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; display: inline-block; font-weight: bold; }
+        .footer { text-align: center; padding: 2rem; color: #64748b; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+    <header class="hero">
+        <h1 class="f1-l f2 mb2">{{ .Title }}</h1>
+        <p class="f4-l f5 white-80">{{ .Description }}</p>
+    </header>
+    <main class="content shadow-4">
+        {{ .Content }}
+        <div class="tc mt5">
+            <a href="/contato/" class="btn grow">Agendar Reunião Estratégica</a>
+        </div>
+    </main>
+    <footer class="footer">
+        © {{ now.Format "2006" }} Henrique Oliver - Especialista em Administração Pública e TI
+    </footer>
+</body>
+</html>
