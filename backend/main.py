@@ -7,40 +7,36 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# --- CONFIGURAÇÃO DE SEGURANÇA (CORS) ---
-# Isso permite que o seu site na Vercel fale com este Backend
+# --- LIBERAÇÃO TOTAL DE SEGURANÇA (CORS) ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Em produção, idealmente coloque o domínio do seu site aqui
+    allow_origins=["*"], # Permite que a Vercel acesse
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Modelo de dados
 class Contato(BaseModel):
     nome: str
     email: str
     mensagem: str
 
-# Conexão com Banco de Dados (Neon)
-def get_db_connection():
-    url = os.getenv("DATABASE_URL")
-    if not url:
-        raise Exception("A variável DATABASE_URL não está configurada no Render.")
-    return psycopg2.connect(url)
-
 @app.get("/")
 def home():
-    return {"status": "online", "message": "Agente de IA operante. Envie POST para /contato"}
+    return {"status": "online", "system": "Henrique Oliver Agent"}
 
 @app.post("/contato")
 def receber_contato(dado: Contato):
     try:
-        conn = get_db_connection()
+        # Tenta conectar ao banco
+        db_url = os.getenv("DATABASE_URL")
+        if not db_url:
+            return {"status": "erro", "mensagem": "Sem conexão com Banco de Dados"}
+            
+        conn = psycopg2.connect(db_url)
         cur = conn.cursor()
         
-        # Cria a tabela se não existir (Autocorreção)
+        # Cria tabela se não existir
         cur.execute("""
             CREATE TABLE IF NOT EXISTS leads (
                 id SERIAL PRIMARY KEY,
@@ -51,7 +47,7 @@ def receber_contato(dado: Contato):
             );
         """)
         
-        # Insere o lead
+        # Salva o contato
         cur.execute(
             "INSERT INTO leads (nome, email, mensagem) VALUES (%s, %s, %s)",
             (dado.nome, dado.email, dado.mensagem)
@@ -61,11 +57,11 @@ def receber_contato(dado: Contato):
         cur.close()
         conn.close()
         
-        print(f"Lead recebido: {dado.email}")
-        return {"status": "sucesso", "mensagem": "Lead registrado no Neon."}
+        return {"status": "sucesso", "mensagem": "Lead salvo no Neon!"}
         
     except Exception as e:
-        print(f"Erro no Backend: {e}")
+        print(f"Erro Crítico: {e}")
+        # Retorna o erro para o site ver o que houve
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
