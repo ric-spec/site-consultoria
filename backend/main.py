@@ -1,21 +1,22 @@
 import os
 import uvicorn
 import psycopg2
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# --- LIBERAÇÃO TOTAL DE SEGURANÇA (CORS) ---
+# 1. Configuração de CORS (Liberar acesso do site)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Permite que a Vercel acesse
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# 2. Modelo de Dados (Garante que os nomes batem)
 class Contato(BaseModel):
     nome: str
     email: str
@@ -23,20 +24,23 @@ class Contato(BaseModel):
 
 @app.get("/")
 def home():
-    return {"status": "online", "system": "Henrique Oliver Agent"}
+    return {"status": "online", "system": "Henrique Oliver Agent V2"}
 
 @app.post("/contato")
 def receber_contato(dado: Contato):
+    print(f"📥 Recebido: {dado}")  # Isso vai aparecer no log do Render
+    
     try:
-        # Tenta conectar ao banco
+        # 3. Conexão com Banco de Dados Neon
         db_url = os.getenv("DATABASE_URL")
         if not db_url:
-            return {"status": "erro", "mensagem": "Sem conexão com Banco de Dados"}
+            print("❌ ERRO: Variável DATABASE_URL não encontrada!")
+            raise HTTPException(status_code=500, detail="Servidor sem configuração de Banco")
             
         conn = psycopg2.connect(db_url)
         cur = conn.cursor()
         
-        # Cria tabela se não existir
+        # Cria a tabela se não existir
         cur.execute("""
             CREATE TABLE IF NOT EXISTS leads (
                 id SERIAL PRIMARY KEY,
@@ -47,7 +51,7 @@ def receber_contato(dado: Contato):
             );
         """)
         
-        # Salva o contato
+        # Insere o dado
         cur.execute(
             "INSERT INTO leads (nome, email, mensagem) VALUES (%s, %s, %s)",
             (dado.nome, dado.email, dado.mensagem)
@@ -58,10 +62,9 @@ def receber_contato(dado: Contato):
         conn.close()
         
         return {"status": "sucesso", "mensagem": "Lead salvo no Neon!"}
-        
+
     except Exception as e:
-        print(f"Erro Crítico: {e}")
-        # Retorna o erro para o site ver o que houve
+        print(f"💀 Erro Crítico no Banco: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
