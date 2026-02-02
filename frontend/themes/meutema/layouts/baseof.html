@@ -3,79 +3,42 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    {{/* NOTE: the Site's title, and if there is a page title, that is set too */}}
     <title>{{ block "title" . }}{{ with .Params.Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{ end }}</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
+    
+    {{/* SEO e Metadados */}}
     <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ else }}{{ with .Site.Params.description }}{{ . }}{{ end }}{{ end }}{{ end }}">
     {{ hugo.Generator }}
-    {{ $production := hugo.IsProduction }}
-    {{ $public := not .Params.private }}
-    {{ if and $production $public }}
-      <meta name="robots" content="index, follow">
-    {{ else }}
-      <meta name="robots" content="noindex, nofollow">
-    {{ end }}
-    {{ with .Params.author | compare.Default .Site.Params.author }}
-      {{- $author := . -}}
-      {{- if reflect.IsSlice . -}}
-        {{- $author = collections.Delimit . ", " | transform.Plainify -}}
-      {{- end -}}
-      <meta name="author" content="{{ $author }}">
-    {{ end }}
+    
+    {{/* Scripts e Estilos Base */}}
+    {{ partial "head-additions.html" . }}
+    {{ partial "opengraph.html" . }}
+    {{ partial "google_analytics.html" . }}
 
-    {{ partials.Include "site-style.html" . }}
-    {{ partials.Include "site-scripts.html" . }}
-
-    {{ block "favicon" . }}
-      {{ partials.IncludeCached "site-favicon.html" . }}
-    {{ end }}
-
-    {{ if .OutputFormats.Get "RSS" }}
-    {{ with .OutputFormats.Get "RSS" }}
-      <link href="{{ .RelPermalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" />
-      <link href="{{ .RelPermalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" />
-      {{ end }}
-    {{ end }}
-
-    {{ if .Params.canonicalUrl }}
-      <link rel="canonical" href="{{ .Params.canonicalUrl }}">
-    {{ else }}
-      <link rel="canonical" href="{{ .Permalink }}">
-    {{ end }}
-
-    {{/* NOTE: These Hugo Internal Templates can be found starting at https://github.com/gohugoio/hugo/tree/master/tpl/tplimpl/embedded/templates */}}
-    {{/* former internal templates */}}
-    {{ partial "opengraph.html" . -}}
-    {{ partial "schema.html" . -}}
-    {{ partial "twitter_cards.html" . -}}
-
-    {{ if hugo.IsProduction }}
-      {{/* former internal template */}}
-      {{ partial "google_analytics.html" . }}
-    {{ end }}
-	{{ block "head" . }}{{ partials.Include "head-additions.html" . }}{{ end }}
+    {{/* Canonical e RSS */}}
+    <link rel="canonical" href="{{ .Permalink }}">
   </head>
 
-  {{- $environment := hugo.Environment | default "production" -}}
+  <body class="bg-near-white avenir">
+    {{/* Início do Body */}}
+    {{ partial "body-before.html" . }}
 
-  {{/* Generate dynamic classes for the body tag */}}
-  {{- $body_classes := slice "ma0" ($.Param "body_classes" | default "avenir bg-near-white") $environment -}}
-  {{- $body_classes = $body_classes | append (printf "is-%s" .Kind) -}}
+    {{/* Navegação Principal */}}
+    {{ partial "menu.html" . }}
+    {{ partial "mobile-drawer.html" . }}
 
-  {{- if .IsPage -}}
-    {{- $body_classes = $body_classes | append "is-page" -}}
-    {{- with .File -}}
-      {{- $body_classes = $body_classes | append (printf "page-%s" .ContentBaseName) -}}
-    {{- end -}}
-  {{- end -}}
+    {{/* Cabeçalho da Página (Título/Hero) */}}
+    {{ partial "page-header.html" . }}
 
-  {{- if .IsSection -}}{{- $body_classes = $body_classes | append "is-section" -}}{{- end -}}
-
-  <body class="{{ delimit $body_classes " " }}">
-    {{ block "header" . }}{{ partials.Include "site-header.html" .}}{{ end }}
     <main class="pb7" role="main">
-      {{ block "main" . }}{{ end }}
+      {{/* Aqui entra o conteúdo do seu _index.md ou serviços */}}
+      {{ block "main" . }}
+        {{ .Content }}
+      {{ end }}
     </main>
-    {{ block "footer" . }}{{ partials.IncludeCached "site-footer.html" . }}{{ end }}
+
+    {{/* Rodapé e Scripts Finais */}}
+    {{ partial "footer-additions.html" . }}
+    {{ partial "body-after.html" . }}
   </body>
 </html>
