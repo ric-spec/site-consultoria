@@ -1,6 +1,8 @@
 ---
+---
 title: "Sobre Henrique Oliver"
 description: "Especialista em Administração Pública e Tecnologia da Informação"
+type: "page"
 ---
 
 ## Quem sou eu
